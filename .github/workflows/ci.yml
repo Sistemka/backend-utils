@@ -25,10 +25,6 @@ jobs:
         run: |
           poetry run flake8 .
 
-      - name: Run tests
+      - name: Run tests and coverage
         run: |
-          poetry run pytest -v tests
-
-      - name: Run tests
-        run: |
-          poetry run coverage report -m --skip-empty --fail-under=100
+          poetry run pytest -v tests && poetry run coverage report -m --skip-empty --fail-under=100
