@@ -1,0 +1,10 @@
+[flake8]
+ignore = I100, I201
+exclude =
+    .git,
+    __pycache__,
+    .venv,
+    env,
+max-complexity = 10
+max-line-length = 120
+format = '%(path)s:%(row)d Column:%(col)d: %(code)s %(text)s'
