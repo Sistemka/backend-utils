@@ -1,0 +1,34 @@
+name: pull-request
+
+on:
+  [pull_request]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+
+      - name: Install dependencies
+        run: poetry install --no-interaction --no-root
+
+      - name: Run linters
+        run: |
+          poetry run flake8 .
+
+      - name: Run tests
+        run: |
+          poetry run coverage run -m pytest -v tests
+
+      - name: Run coverage
+        run: |
+          poetry run coverage report -m --skip-empty --fail-under=100
